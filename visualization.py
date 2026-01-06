@@ -12,6 +12,222 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+class StyleInjectorElement(TextElement):
+    """Inject global CSS for modern dark theme design."""
+    
+    def __init__(self):
+        pass
+    
+    def render(self, model):
+        return '''
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+            
+            /* ===== GLOBAL DARK THEME ===== */
+            body {
+                background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%) !important;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+                color: #e4e4e7 !important;
+                min-height: 100vh;
+            }
+            
+            .container, .container-fluid {
+                background: transparent !important;
+            }
+            
+            /* ===== NAVBAR STYLING ===== */
+            .navbar, nav.navbar {
+                background: rgba(13, 17, 23, 0.95) !important;
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+                border-bottom: 1px solid rgba(99, 102, 241, 0.3) !important;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
+                padding: 0.75rem 1.5rem !important;
+            }
+            
+            .navbar-brand {
+                color: #fff !important;
+                font-weight: 700 !important;
+                font-size: 1.35rem !important;
+                text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+            }
+            
+            .navbar .btn, .navbar button, .navbar a.nav-link {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+                border: none !important;
+                color: white !important;
+                font-weight: 600 !important;
+                padding: 0.5rem 1.25rem !important;
+                border-radius: 8px !important;
+                transition: all 0.3s ease !important;
+                box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+                margin: 0 0.25rem !important;
+            }
+            
+            .navbar .btn:hover, .navbar button:hover, .navbar a.nav-link:hover {
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6) !important;
+            }
+            
+            /* ===== SIDEBAR STYLING ===== */
+            .col-md-3, .col-sm-3, [class*="sidebar"] {
+                background: rgba(13, 17, 23, 0.9) !important;
+                backdrop-filter: blur(15px) !important;
+                -webkit-backdrop-filter: blur(15px) !important;
+                border-right: 1px solid rgba(99, 102, 241, 0.2) !important;
+                padding: 1.5rem !important;
+            }
+            
+            /* Parameter labels */
+            .badge, label, .form-label {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+                color: white !important;
+                font-weight: 500 !important;
+                padding: 0.5rem 1rem !important;
+                border-radius: 6px !important;
+                display: inline-block !important;
+                margin-bottom: 0.5rem !important;
+                font-size: 0.85rem !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.05em !important;
+                box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3) !important;
+            }
+            
+            /* Custom sliders */
+            input[type="range"] {
+                -webkit-appearance: none !important;
+                width: 100% !important;
+                height: 8px !important;
+                border-radius: 4px !important;
+                background: rgba(99, 102, 241, 0.25) !important;
+                outline: none !important;
+                margin: 0.75rem 0 !important;
+            }
+            
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none !important;
+                width: 20px !important;
+                height: 20px !important;
+                border-radius: 50% !important;
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+                cursor: pointer !important;
+                box-shadow: 0 2px 10px rgba(99, 102, 241, 0.6) !important;
+                transition: all 0.2s ease !important;
+            }
+            
+            input[type="range"]::-webkit-slider-thumb:hover {
+                transform: scale(1.1) !important;
+                box-shadow: 0 4px 15px rgba(99, 102, 241, 0.8) !important;
+            }
+            
+            /* Custom dropdowns */
+            select, .form-select {
+                background: rgba(13, 17, 23, 0.9) !important;
+                border: 1px solid rgba(99, 102, 241, 0.35) !important;
+                color: #e4e4e7 !important;
+                padding: 0.6rem 1rem !important;
+                border-radius: 8px !important;
+                font-size: 0.9rem !important;
+                width: 100% !important;
+                margin-bottom: 1rem !important;
+                cursor: pointer !important;
+                transition: all 0.2s ease !important;
+            }
+            
+            select:hover, select:focus {
+                border-color: rgba(99, 102, 241, 0.7) !important;
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+                outline: none !important;
+            }
+            
+            select option {
+                background: #0d1117 !important;
+                color: #e4e4e7 !important;
+            }
+            
+            /* ===== MAIN CONTENT AREA ===== */
+            .col-md-9, .col-sm-9 {
+                background: transparent !important;
+                padding: 1.5rem !important;
+            }
+            
+            /* FPS Slider area */
+            .fps-slider, [class*="fps"] {
+                background: rgba(13, 17, 23, 0.8) !important;
+                border-radius: 10px !important;
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
+                border: 1px solid rgba(99, 102, 241, 0.15) !important;
+            }
+            
+            /* ===== CANVAS GRID STYLING - BORDER ONLY ===== */
+            canvas {
+                border-radius: 12px !important;
+                box-shadow: 
+                    0 0 0 2px rgba(99, 102, 241, 0.4),
+                    0 0 30px rgba(99, 102, 241, 0.15),
+                    0 8px 32px rgba(0, 0, 0, 0.6) !important;
+            }
+            
+            /* Canvas container wrapper - only for border effect */
+            .world-grid, [class*="world"], [class*="grid-container"] {
+                border-radius: 14px !important;
+                padding: 4px !important;
+                border: 1px solid rgba(99, 102, 241, 0.3) !important;
+            }
+            
+            /* ===== CHART STYLING ===== */
+            .chart-container, [class*="chart"] {
+                background: rgba(13, 17, 23, 0.9) !important;
+                backdrop-filter: blur(10px) !important;
+                border-radius: 12px !important;
+                padding: 1rem !important;
+                margin-top: 1rem !important;
+                border: 1px solid rgba(99, 102, 241, 0.2) !important;
+            }
+            
+            /* ===== TEXT COLORS ===== */
+            p, span, div, td, th, li {
+                color: #c9d1d9 !important;
+            }
+            
+            h1, h2, h3, h4, h5, h6 {
+                color: #fff !important;
+            }
+            
+            /* ===== SCROLLBAR ===== */
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            
+            ::-webkit-scrollbar-track {
+                background: rgba(13, 17, 23, 0.5);
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+                border-radius: 4px;
+            }
+            
+            ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            }
+            
+            /* ===== ANIMATIONS ===== */
+            @keyframes pulse-glow {
+                0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+                50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.5); }
+            }
+            
+            /* ===== RESPONSIVE FIXES ===== */
+            .row {
+                margin: 0 !important;
+            }
+        </style>
+        '''
+
+
 class NetworkStatsElement(TextElement):
     """Display real-time network statistics with enhanced formatting."""
     
@@ -33,76 +249,76 @@ class NetworkStatsElement(TextElement):
             status = "✓ OPERATIONAL"
         
         html = f"""
-        <div style="font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-            <h2 style="margin-top: 0; text-align: center; font-size: 24px;">🚄 RAILWAY CONTROL CENTER</h2>
-            <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 15px;">
-                <strong style="font-size: 18px; color: {status_color};">{status}</strong>
+        <div style="font-family: 'Inter', -apple-system, sans-serif; background: rgba(26, 26, 46, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 24px; border-radius: 16px; color: #e4e4e7; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid rgba(99, 102, 241, 0.2); margin-bottom: 20px;">
+            <h2 style="margin-top: 0; text-align: center; font-size: 22px; font-weight: 700; background: linear-gradient(135deg, #6366f1, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚄 RAILWAY CONTROL CENTER</h2>
+            <div style="background: rgba(99, 102, 241, 0.15); padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 20px; border: 1px solid rgba(99, 102, 241, 0.2);">
+                <strong style="font-size: 16px; color: {status_color}; text-shadow: 0 0 10px {status_color}40;">{status}</strong>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;">
-                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 32px; font-weight: bold;">{stats['total_steps']}</div>
-                    <div style="font-size: 12px; opacity: 0.9;">SIMULATION STEP</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px;">
+                <div style="background: rgba(99, 102, 241, 0.12); padding: 16px; border-radius: 12px; text-align: center; border: 1px solid rgba(99, 102, 241, 0.15);">
+                    <div style="font-size: 28px; font-weight: 700; color: #a78bfa;">{stats['total_steps']}</div>
+                    <div style="font-size: 10px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;">Simulation Step</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 32px; font-weight: bold;">{stats['weather'].upper()}</div>
-                    <div style="font-size: 12px; opacity: 0.9;">WEATHER</div>
+                <div style="background: rgba(99, 102, 241, 0.12); padding: 16px; border-radius: 12px; text-align: center; border: 1px solid rgba(99, 102, 241, 0.15);">
+                    <div style="font-size: 28px; font-weight: 700; color: #60a5fa;">{stats['weather'].upper()}</div>
+                    <div style="font-size: 10px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;">Weather</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 32px; font-weight: bold;">{stats['network_utilization']:.0f}%</div>
-                    <div style="font-size: 12px; opacity: 0.9;">UTILIZATION</div>
-                </div>
-            </div>
-            
-            <h3 style="margin-top: 20px; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 5px;">🚂 TRAIN OPERATIONS</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 8px;">
-                <div style="background: rgba(52, 152, 219, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 22px; font-weight: bold;">{stats['active_trains']}</div>
-                    <div style="font-size: 10px;">ACTIVE</div>
-                </div>
-                <div style="background: rgba(46, 204, 113, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 22px; font-weight: bold;">{stats['arrived_trains']}</div>
-                    <div style="font-size: 10px;">TRIPS DONE</div>
-                </div>
-                <div style="background: rgba(231, 76, 60, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 22px; font-weight: bold;">{stats['delayed_trains']}</div>
-                    <div style="font-size: 10px;">DELAYED</div>
-                </div>
-                <div style="background: rgba(241, 196, 15, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 22px; font-weight: bold;">{stats['average_delay']:.1f}</div>
-                    <div style="font-size: 10px;">AVG DELAY</div>
-                </div>
-                <div style="background: rgba(155, 89, 182, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 22px; font-weight: bold;">{model.dispatcher.scheduled_departures.__len__()}</div>
-                    <div style="font-size: 10px;">SCHEDULED</div>
+                <div style="background: rgba(99, 102, 241, 0.12); padding: 16px; border-radius: 12px; text-align: center; border: 1px solid rgba(99, 102, 241, 0.15);">
+                    <div style="font-size: 28px; font-weight: 700; color: #34d399;">{stats['network_utilization']:.0f}%</div>
+                    <div style="font-size: 10px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px;">Utilization</div>
                 </div>
             </div>
             
-            <h3 style="margin-top: 20px; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 5px;">👥 PASSENGER SERVICES</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div style="background: rgba(155, 89, 182, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 24px; font-weight: bold;">{stats['total_passengers_waiting']}</div>
-                    <div style="font-size: 11px;">WAITING</div>
+            <h3 style="margin-top: 24px; border-bottom: 1px solid rgba(99, 102, 241, 0.3); padding-bottom: 8px; font-size: 14px; font-weight: 600; color: #a78bfa;">🚂 TRAIN OPERATIONS</h3>
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 12px;">
+                <div style="background: rgba(59, 130, 246, 0.15); padding: 12px 8px; border-radius: 10px; text-align: center; border: 1px solid rgba(59, 130, 246, 0.2);">
+                    <div style="font-size: 20px; font-weight: 700; color: #60a5fa;">{stats['active_trains']}</div>
+                    <div style="font-size: 9px; opacity: 0.7; margin-top: 2px;">ACTIVE</div>
                 </div>
-                <div style="background: rgba(26, 188, 156, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 24px; font-weight: bold;">{stats['total_passengers_arrived']}</div>
-                    <div style="font-size: 11px;">DELIVERED</div>
+                <div style="background: rgba(34, 197, 94, 0.15); padding: 12px 8px; border-radius: 10px; text-align: center; border: 1px solid rgba(34, 197, 94, 0.2);">
+                    <div style="font-size: 20px; font-weight: 700; color: #4ade80;">{stats['arrived_trains']}</div>
+                    <div style="font-size: 9px; opacity: 0.7; margin-top: 2px;">ARRIVED</div>
+                </div>
+                <div style="background: rgba(239, 68, 68, 0.15); padding: 12px 8px; border-radius: 10px; text-align: center; border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <div style="font-size: 20px; font-weight: 700; color: #f87171;">{stats['delayed_trains']}</div>
+                    <div style="font-size: 9px; opacity: 0.7; margin-top: 2px;">DELAYED</div>
+                </div>
+                <div style="background: rgba(251, 191, 36, 0.15); padding: 12px 8px; border-radius: 10px; text-align: center; border: 1px solid rgba(251, 191, 36, 0.2);">
+                    <div style="font-size: 20px; font-weight: 700; color: #fbbf24;">{stats['average_delay']:.1f}</div>
+                    <div style="font-size: 9px; opacity: 0.7; margin-top: 2px;">AVG DELAY</div>
+                </div>
+                <div style="background: rgba(168, 85, 247, 0.15); padding: 12px 8px; border-radius: 10px; text-align: center; border: 1px solid rgba(168, 85, 247, 0.2);">
+                    <div style="font-size: 20px; font-weight: 700; color: #c084fc;">{model.dispatcher.scheduled_departures.__len__()}</div>
+                    <div style="font-size: 9px; opacity: 0.7; margin-top: 2px;">SCHEDULED</div>
                 </div>
             </div>
             
-            <h3 style="margin-top: 20px; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 5px;">⚡ SYSTEM STATUS</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
-                <div style="background: rgba(230, 126, 34, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 24px; font-weight: bold;">{stats['average_energy']:.0f}</div>
-                    <div style="font-size: 11px;">AVG ENERGY</div>
+            <h3 style="margin-top: 24px; border-bottom: 1px solid rgba(99, 102, 241, 0.3); padding-bottom: 8px; font-size: 14px; font-weight: 600; color: #a78bfa;">👥 PASSENGER SERVICES</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;">
+                <div style="background: rgba(168, 85, 247, 0.15); padding: 14px; border-radius: 10px; text-align: center; border: 1px solid rgba(168, 85, 247, 0.2);">
+                    <div style="font-size: 22px; font-weight: 700; color: #c084fc;">{stats['total_passengers_waiting']}</div>
+                    <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">WAITING</div>
                 </div>
-                <div style="background: rgba(192, 57, 43, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 24px; font-weight: bold;">{stats['track_failures']}</div>
-                    <div style="font-size: 11px;">FAILURES</div>
+                <div style="background: rgba(20, 184, 166, 0.15); padding: 14px; border-radius: 10px; text-align: center; border: 1px solid rgba(20, 184, 166, 0.2);">
+                    <div style="font-size: 22px; font-weight: 700; color: #2dd4bf;">{stats['total_passengers_arrived']}</div>
+                    <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">DELIVERED</div>
                 </div>
-                <div style="background: rgba(142, 68, 173, 0.3); padding: 10px; border-radius: 5px; text-align: center;">
-                    <div style="font-size: 24px; font-weight: bold;">{stats['priority_conflicts']}</div>
-                    <div style="font-size: 11px;">CONFLICTS</div>
+            </div>
+            
+            <h3 style="margin-top: 24px; border-bottom: 1px solid rgba(99, 102, 241, 0.3); padding-bottom: 8px; font-size: 14px; font-weight: 600; color: #a78bfa;">⚡ SYSTEM STATUS</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px;">
+                <div style="background: rgba(249, 115, 22, 0.15); padding: 14px; border-radius: 10px; text-align: center; border: 1px solid rgba(249, 115, 22, 0.2);">
+                    <div style="font-size: 22px; font-weight: 700; color: #fb923c;">{stats['average_energy']:.0f}</div>
+                    <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">AVG ENERGY</div>
+                </div>
+                <div style="background: rgba(239, 68, 68, 0.15); padding: 14px; border-radius: 10px; text-align: center; border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <div style="font-size: 22px; font-weight: 700; color: #f87171;">{stats['track_failures']}</div>
+                    <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">FAILURES</div>
+                </div>
+                <div style="background: rgba(168, 85, 247, 0.15); padding: 14px; border-radius: 10px; text-align: center; border: 1px solid rgba(168, 85, 247, 0.2);">
+                    <div style="font-size: 22px; font-weight: 700; color: #c084fc;">{stats['priority_conflicts']}</div>
+                    <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">CONFLICTS</div>
                 </div>
             </div>
         </div>
@@ -118,95 +334,137 @@ class LegendElement(TextElement):
     
     def render(self, model):
         html = """
-        <div style="font-family: 'Segoe UI', Arial, sans-serif; background: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 20px;">
-            <h3 style="margin-top: 0; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">📍 MAP LEGEND</h3>
+        <div style="font-family: 'Inter', -apple-system, sans-serif; background: rgba(26, 26, 46, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 20px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); margin-top: 16px; border: 1px solid rgba(99, 102, 241, 0.2);">
+            <h3 style="margin-top: 0; color: #a78bfa; border-bottom: 1px solid rgba(99, 102, 241, 0.3); padding-bottom: 10px; font-size: 15px; font-weight: 600;">📍 MAP LEGEND</h3>
             
-            <div style="margin-bottom: 20px;">
-                <h4 style="color: #34495e; margin-bottom: 10px;">🚂 Trains (Colored Squares)</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 24px; height: 24px; background: #3498db; border: 2px solid #2c3e50; margin-right: 10px;"></div>
-                        <span>Passenger Train</span>
+            <div style="margin-bottom: 16px;">
+                <h4 style="color: #c4b5fd; margin-bottom: 10px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">🚂 Train Types</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(0, 212, 255, 0.15); border-radius: 6px;">
+                        <div style="width: 18px; height: 18px; background: #00d4ff; border: 2px solid #ffffff; border-radius: 3px; margin-right: 8px;"></div>
+                        <span style="font-size: 12px; color: #e4e4e7;">Passenger</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 24px; height: 24px; background: #e67e22; border: 2px solid #2c3e50; margin-right: 10px;"></div>
-                        <span>Cargo Train</span>
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(255, 149, 0, 0.15); border-radius: 6px;">
+                        <div style="width: 18px; height: 18px; background: #ff9500; border: 2px solid #ffffff; border-radius: 3px; margin-right: 8px;"></div>
+                        <span style="font-size: 12px; color: #e4e4e7;">Cargo</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 24px; height: 24px; background: #9b59b6; border: 2px solid #2c3e50; margin-right: 10px;"></div>
-                        <span>Express Train</span>
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(191, 90, 242, 0.15); border-radius: 6px;">
+                        <div style="width: 18px; height: 18px; background: #bf5af2; border: 2px solid #ffffff; border-radius: 3px; margin-right: 8px;"></div>
+                        <span style="font-size: 12px; color: #e4e4e7;">Express</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 24px; height: 24px; background: #e74c3c; border: 2px solid #2c3e50; margin-right: 10px;"></div>
-                        <span>Emergency Train</span>
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(255, 69, 58, 0.15); border-radius: 6px;">
+                        <div style="width: 18px; height: 18px; background: #ff453a; border: 2px solid #ffffff; border-radius: 3px; margin-right: 8px;"></div>
+                        <span style="font-size: 12px; color: #e4e4e7;">Emergency</span>
                     </div>
                 </div>
             </div>
             
-            <div style="margin-bottom: 20px;">
-                <h4 style="color: #34495e; margin-bottom: 10px;">🚦 Signals (Colored Circles)</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 20px; height: 20px; background: #2ecc71; border-radius: 50%; margin-right: 10px; border: 1px solid #27ae60;"></div>
-                        <span>Track Free</span>
+            <div style="margin-bottom: 16px;">
+                <h4 style="color: #c4b5fd; margin-bottom: 10px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">🚦 Signals</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(48, 209, 88, 0.15); border-radius: 6px;">
+                        <div style="width: 14px; height: 14px; background: #30d158; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px #30d15890;"></div>
+                        <span style="font-size: 11px; color: #e4e4e7;">Free</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 20px; height: 20px; background: #f39c12; border-radius: 50%; margin-right: 10px; border: 1px solid #e67e22;"></div>
-                        <span>Occupied</span>
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(255, 214, 10, 0.15); border-radius: 6px;">
+                        <div style="width: 14px; height: 14px; background: #ffd60a; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px #ffd60a90;"></div>
+                        <span style="font-size: 11px; color: #e4e4e7;">Busy</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 20px; height: 20px; background: #c0392b; border-radius: 50%; margin-right: 10px; border: 1px solid #a93226;"></div>
-                        <span>Failed</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-                <h4 style="color: #34495e; margin-bottom: 10px;">📍 Infrastructure</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 24px; height: 24px; background: #16a085; border: 2px solid #0e6655; margin-right: 10px;"></div>
-                        <span>Station</span>
-                    </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 24px; height: 24px; background: #2d5016; margin-right: 10px;"></div>
-                        <span>Railway Track</span>
-                    </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 24px; height: 24px; background: #7cb342; margin-right: 10px;"></div>
-                        <span>Grass/Field</span>
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(255, 69, 58, 0.15); border-radius: 6px;">
+                        <div style="width: 14px; height: 14px; background: #ff453a; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px #ff453a90;"></div>
+                        <span style="font-size: 11px; color: #e4e4e7;">Failed</span>
                     </div>
                 </div>
             </div>
             
             <div>
-                <h4 style="color: #34495e; margin-bottom: 10px;">🚂 Train States (Border Colors)</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 13px;">
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 20px; height: 20px; background: #3498db; border: 2px solid #2c3e50; margin-right: 8px;"></div>
-                        <span>Moving (Normal)</span>
+                <h4 style="color: #c4b5fd; margin-bottom: 10px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">📍 Infrastructure</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 6px;">
+                        <div style="width: 18px; height: 18px; background: #ffffff; border: 2px solid #00d4ff; border-radius: 3px; margin-right: 8px;"></div>
+                        <span style="font-size: 11px; color: #e4e4e7;">Station</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 20px; height: 20px; background: #3498db; border: 3px solid #f39c12; margin-right: 8px;"></div>
-                        <span>Waiting (Orange)</span>
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(61, 79, 95, 0.25); border-radius: 6px;">
+                        <div style="width: 18px; height: 18px; background: #3d4f5f; border-radius: 3px; margin-right: 8px;"></div>
+                        <span style="font-size: 11px; color: #e4e4e7;">Track</span>
                     </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 20px; height: 20px; background: #3498db; border: 4px solid #c0392b; margin-right: 8px;"></div>
-                        <span>Delayed (Red)</span>
-                    </div>
-                    <div style="display: flex; align-items: center;">
-                        <div style="width: 20px; height: 20px; background: #3498db; border: 3px solid #27ae60; margin-right: 8px;"></div>
-                        <span>Arrived (Green)</span>
+                    <div style="display: flex; align-items: center; padding: 6px; background: rgba(13, 17, 23, 0.5); border-radius: 6px;">
+                        <div style="width: 18px; height: 18px; background: #0d1117; border: 1px solid #30363d; border-radius: 3px; margin-right: 8px;"></div>
+                        <span style="font-size: 11px; color: #e4e4e7;">Empty</span>
                     </div>
                 </div>
-            </div>
-            
-            <div style="margin-top: 15px; padding: 10px; background: #e8f5e9; border-radius: 5px; border-left: 4px solid #66bb6a;">
-                <strong>💡 Nature Theme:</strong> Grass green background with dark green tracks. Trains are colored squares, signals are circles!
             </div>
         </div>
         """
         return html
+
+
+class CustomCanvasGrid(CanvasGrid):
+    """Custom CanvasGrid that allows overriding the grid line color."""
+    
+    def __init__(self, portrayal_method, grid_width, grid_height, 
+                 canvas_width, canvas_height, grid_color="#333333"):
+        super().__init__(portrayal_method, grid_width, grid_height, 
+                        canvas_width, canvas_height)
+        self.grid_color = grid_color
+        
+        # Inject JavaScript to override the grid line color
+        # We need to patch after the CanvasModule is initialized
+        self.js_code += f"""
+        // Override grid line color after initialization
+        (function() {{
+            var gridColor = "{self.grid_color}";
+            var gridWidth = {grid_width};
+            var gridHeight = {grid_height};
+            var canvasWidth = {canvas_width};
+            var canvasHeight = {canvas_height};
+            
+            // Wait for elements to be created, then patch
+            var patchInterval = setInterval(function() {{
+                // Find all CanvasModule instances in elements array
+                if (typeof elements !== 'undefined' && elements.length > 0) {{
+                    for (var i = 0; i < elements.length; i++) {{
+                        var el = elements[i];
+                        if (el && el.gridViz && el.gridViz.drawGridLines && !el._gridColorPatched) {{
+                            el._gridColorPatched = true;
+                            
+                            // Get the canvas context
+                            var context = el.context;
+                            var cellWidth = Math.floor(canvasWidth / gridWidth);
+                            var cellHeight = Math.floor(canvasHeight / gridHeight);
+                            
+                            // Override drawGridLines on this specific instance
+                            el.gridViz.drawGridLines = function() {{
+                                context.beginPath();
+                                context.strokeStyle = gridColor;
+                                var maxX = cellWidth * gridWidth;
+                                var maxY = cellHeight * gridHeight;
+                                
+                                for (var y = 0; y <= maxY; y += cellHeight) {{
+                                    context.moveTo(0, y + 0.5);
+                                    context.lineTo(maxX, y + 0.5);
+                                }}
+                                for (var x = 0; x <= maxX; x += cellWidth) {{
+                                    context.moveTo(x + 0.5, 0);
+                                    context.lineTo(x + 0.5, maxY);
+                                }}
+                                context.stroke();
+                            }};
+                            
+                            clearInterval(patchInterval);
+                            console.log("Grid color patched to: " + gridColor);
+                        }}
+                    }}
+                }}
+            }}, 100);
+            
+            // Clear interval after 10 seconds to prevent infinite loop
+            setTimeout(function() {{ clearInterval(patchInterval); }}, 10000);
+        }})();
+        """
+        
+    def render(self, model):
+        return super().render(model)
 
 
 class ScheduleElement(TextElement):
@@ -223,20 +481,20 @@ class ScheduleElement(TextElement):
         active_trains = [t for t in model.get_all_trains() if t.state not in [TrainState.ARRIVED, TrainState.MAINTENANCE]]
         
         html = f"""
-        <div style="font-family: 'Segoe UI', Arial, sans-serif; background: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 20px; height: 450px; overflow: hidden;">
-            <h3 style="margin-top: 0; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">🕒 REAL-TIME SCHEDULE (Step: {current_time})</h3>
+        <div style="font-family: 'Inter', -apple-system, sans-serif; background: rgba(26, 26, 46, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 20px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); margin-top: 16px; border: 1px solid rgba(99, 102, 241, 0.2); max-height: 400px; overflow: hidden;">
+            <h3 style="margin-top: 0; color: #a78bfa; border-bottom: 1px solid rgba(99, 102, 241, 0.3); padding-bottom: 10px; font-size: 15px; font-weight: 600;">🕒 REAL-TIME SCHEDULE (Step: {current_time})</h3>
             
-            <h4 style="color: #34495e; margin-top: 15px; margin-bottom: 10px;">🚂 Active Trains ({len(active_trains)})</h4>
-            <div style="height: 180px; overflow: hidden; margin-bottom: 20px;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 12px; table-layout: fixed;">
+            <h4 style="color: #c4b5fd; margin-top: 12px; margin-bottom: 8px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">🚂 Active Trains ({len(active_trains)})</h4>
+            <div style="max-height: 160px; overflow-y: auto; margin-bottom: 16px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 11px; table-layout: fixed;">
                     <thead>
-                        <tr style="background: #34495e; color: white;">
-                            <th style="padding: 6px; text-align: left; width: 12%;">ID</th>
-                            <th style="padding: 6px; text-align: left; width: 15%;">Type</th>
-                            <th style="padding: 6px; text-align: left; width: 15%;">State</th>
-                            <th style="padding: 6px; text-align: left; width: 20%;">Position</th>
-                            <th style="padding: 6px; text-align: left; width: 23%;">Destination</th>
-                            <th style="padding: 6px; text-align: right; width: 15%;">Energy</th>
+                        <tr style="background: rgba(99, 102, 241, 0.2); color: #e4e4e7;">
+                            <th style="padding: 8px 6px; text-align: left; width: 12%; font-weight: 600;">ID</th>
+                            <th style="padding: 8px 6px; text-align: left; width: 15%; font-weight: 600;">Type</th>
+                            <th style="padding: 8px 6px; text-align: left; width: 15%; font-weight: 600;">State</th>
+                            <th style="padding: 8px 6px; text-align: left; width: 20%; font-weight: 600;">Position</th>
+                            <th style="padding: 8px 6px; text-align: left; width: 23%; font-weight: 600;">Dest</th>
+                            <th style="padding: 8px 6px; text-align: right; width: 15%; font-weight: 600;">Energy</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -267,32 +525,32 @@ class ScheduleElement(TextElement):
             energy_color = '#27ae60' if energy_percent > 50 else ('#f39c12' if energy_percent > 20 else '#e74c3c')
             
             html += f"""
-            <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 6px; color: {type_color}; font-weight: bold;">T{train.unique_id}</td>
-                <td style="padding: 6px;">{train.train_type.value.title()[:4]}</td>
-                <td style="padding: 6px; color: {state_color}; font-weight: bold;">{train.state.value.upper()[:4]}</td>
-                <td style="padding: 6px; font-size: 10px;">({train.current_position[0]},{train.current_position[1]})</td>
-                <td style="padding: 6px; font-size: 10px;">({train.destination[0]},{train.destination[1]})</td>
-                <td style="padding: 6px; text-align: right; color: {energy_color};">{energy_percent:.0f}%</td>
+            <tr style="border-bottom: 1px solid rgba(99, 102, 241, 0.1); transition: background 0.2s;" onmouseover="this.style.background='rgba(99, 102, 241, 0.1)'" onmouseout="this.style.background='transparent'">
+                <td style="padding: 6px; color: {type_color}; font-weight: 600;">{train.unique_id}</td>
+                <td style="padding: 6px; color: #a5b4fc;">{train.train_type.value.title()[:4]}</td>
+                <td style="padding: 6px; color: {state_color}; font-weight: 600;">{train.state.value.upper()[:4]}</td>
+                <td style="padding: 6px; font-size: 10px; color: #94a3b8;">({train.current_position[0]},{train.current_position[1]})</td>
+                <td style="padding: 6px; font-size: 10px; color: #94a3b8;">({train.destination[0]},{train.destination[1]})</td>
+                <td style="padding: 6px; text-align: right; color: {energy_color}; font-weight: 600;">{energy_percent:.0f}%</td>
             </tr>
             """
         
         if not active_trains:
-            html += '<tr><td colspan="6" style="padding: 8px; text-align: center; color: #6c757d;">No active trains currently.</td></tr>'
+            html += '<tr><td colspan="6" style="padding: 12px; text-align: center; color: #64748b; font-style: italic;">No active trains currently.</td></tr>'
         
         html += """
                     </tbody>
                 </table>
             </div>
             
-            <h4 style="color: #34495e; margin-top: 15px; margin-bottom: 10px;">📅 Upcoming Departures</h4>
+            <h4 style="color: #c4b5fd; margin-top: 12px; margin-bottom: 8px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">📅 Upcoming Departures</h4>
             <div style="overflow: hidden;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 12px; table-layout: fixed;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 11px; table-layout: fixed;">
                     <thead>
-                        <tr style="background: #e9ecef; color: #495057;">
-                            <th style="padding: 6px; text-align: left; width: 35%;">Time</th>
-                            <th style="padding: 6px; text-align: left; width: 25%;">Type</th>
-                            <th style="padding: 6px; text-align: left; width: 40%;">Route</th>
+                        <tr style="background: rgba(99, 102, 241, 0.15); color: #e4e4e7;">
+                            <th style="padding: 8px 6px; text-align: left; width: 35%; font-weight: 600;">Time</th>
+                            <th style="padding: 8px 6px; text-align: left; width: 25%; font-weight: 600;">Type</th>
+                            <th style="padding: 8px 6px; text-align: left; width: 40%; font-weight: 600;">Route</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -304,15 +562,15 @@ class ScheduleElement(TextElement):
             time_color = '#e74c3c' if time_until <= 5 else ('#f39c12' if time_until <= 15 else '#27ae60')
             
             html += f"""
-            <tr style="border-bottom: 1px solid #dee2e6;">
-                <td style="padding: 6px; color: {time_color}; font-weight: bold;">{d['departure_time']} (T-{time_until})</td>
-                <td style="padding: 6px;">{d['train_type'].value.title()}</td>
-                <td style="padding: 6px; font-size: 10px;">{d['origin']} → {d['destination']}</td>
+            <tr style="border-bottom: 1px solid rgba(99, 102, 241, 0.1);">
+                <td style="padding: 6px; color: {time_color}; font-weight: 600;">{d['departure_time']} (T-{time_until})</td>
+                <td style="padding: 6px; color: #a5b4fc;">{d['train_type'].value.title()}</td>
+                <td style="padding: 6px; font-size: 10px; color: #94a3b8;">{d['origin']} → {d['destination']}</td>
             </tr>
             """
         
         if not departures:
-            html += '<tr><td colspan="3" style="padding: 8px; text-align: center; color: #6c757d;">No new departures scheduled.</td></tr>'
+            html += '<tr><td colspan="3" style="padding: 12px; text-align: center; color: #64748b; font-style: italic;">No departures scheduled.</td></tr>'
 
         html += """
                     </tbody>
@@ -325,45 +583,48 @@ class ScheduleElement(TextElement):
 
 def agent_portrayal(agent):
     """
-    Enhanced agent portrayal with beautiful, realistic graphics.
-    Nature-themed grass green background with darker green tracks.
+    Enhanced agent portrayal with high-contrast colors.
+    Vibrant, saturated colors for maximum visibility on dark background.
+    Color-blind friendly palette with good contrast ratios.
     """
     if isinstance(agent, TrackAgent):
-        # Railway track visualization - darker green for contrast with grass background
+        # Railway track - GREEN for high visibility and clear railway paths
         return {
             "Shape": "rect",
             "w": 1,
             "h": 1,
             "Filled": "true",
             "Layer": 0,
-            "Color": "#2d5016",  # Dark forest green for tracks
-            "text": "",  # No emoji, cleaner look
-            "text_color": "#1a3409"
+            "Color": "#228B22",  # Forest Green - clear railway path visibility
+            "stroke_color": "#000000",  # Black border for definition
+            "stroke": 1,
+            "text": "",
+            "text_color": "#ffffff"
         }
     
     elif isinstance(agent, TrainAgent):
-        # Enhanced train visualization - consistent colored squares
+        # High-contrast train visualization with vibrant colors
         portrayal = {
             "Shape": "rect",
-            "w": 0.9,
-            "h": 0.9,
+            "w": 0.85,
+            "h": 0.85,
             "Filled": "true",
             "Layer": 3,
-            "stroke_color": "#2c3e50",
+            "stroke_color": "#ffffff",  # White border for visibility
             "stroke": 2,
-            "text": "",  # No text by default for cleaner look
+            "text": "",
             "text_color": "white"
         }
         
-        # Color by train type with vibrant colors (CONSISTENT with legend)
+        # VIBRANT colors for high contrast on dark background
         if agent.train_type == TrainType.PASSENGER:
-            portrayal["Color"] = "#3498db"  # Bright Blue
+            portrayal["Color"] = "#00d4ff"  # Bright Cyan
         elif agent.train_type == TrainType.CARGO:
-            portrayal["Color"] = "#e67e22"  # Orange
+            portrayal["Color"] = "#ff9500"  # Bright Orange
         elif agent.train_type == TrainType.EXPRESS:
-            portrayal["Color"] = "#9b59b6"  # Purple
+            portrayal["Color"] = "#bf5af2"  # Bright Magenta/Purple
         elif agent.train_type == TrainType.EMERGENCY:
-            portrayal["Color"] = "#e74c3c"  # Red
+            portrayal["Color"] = "#ff453a"  # Bright Red
         
         # Visual state indicators - only change color for special states
         if agent.state == TrainState.WAITING:
@@ -402,64 +663,67 @@ def agent_portrayal(agent):
         return portrayal
     
     elif isinstance(agent, SignalAgent):
-        # Beautiful signal lights
+        # High-visibility signal lights with glow effect
         portrayal = {
             "Shape": "circle",
-            "r": 0.4,
+            "r": 0.45,
             "Filled": "true",
             "Layer": 2,
         }
         
-        # Traffic light colors
+        # Bright, saturated traffic light colors
         if agent.track_status == "failed":
-            portrayal["Color"] = "#c0392b"  # Dark Red
+            portrayal["Color"] = "#ff453a"  # Bright Red
             portrayal["text"] = "✖"
             portrayal["text_color"] = "white"
         elif agent.track_occupied:
-            portrayal["Color"] = "#f39c12"  # Amber/Yellow
+            portrayal["Color"] = "#ffd60a"  # Bright Yellow
             portrayal["text"] = "●"
-            portrayal["text_color"] = "white"
+            portrayal["text_color"] = "#1a1a1a"
         else:
-            portrayal["Color"] = "#2ecc71"  # Bright Green
+            portrayal["Color"] = "#30d158"  # Bright Green
             portrayal["text"] = "●"
             portrayal["text_color"] = "white"
         
-        # Add subtle glow
-        portrayal["stroke_color"] = "#ecf0f1"
+        # White border for glow effect
+        portrayal["stroke_color"] = "#ffffff"
         portrayal["stroke"] = 1
         
         return portrayal
     
     elif isinstance(agent, StationAgent):
-        # Beautiful station representation - CONSISTENT colored squares
+        # HIGH-VISIBILITY station - bright white/cyan for maximum contrast
         portrayal = {
             "Shape": "rect",
-            "w": 0.95,
-            "h": 0.95,
+            "w": 0.92,
+            "h": 0.92,
             "Filled": "true",
             "Layer": 1,
-            "Color": "#16a085",  # Teal (matches legend)
-            "stroke_color": "#0e6655",
-            "stroke": 2,
-            "text": "",  # No emoji for consistency
-            "text_color": "white"
+            "Color": "#ffffff",  # Bright white for maximum visibility
+            "stroke_color": "#00d4ff",  # Cyan glow border
+            "stroke": 3,
+            "text": "",
+            "text_color": "#0d1117"
         }
         
         # Highlight stations with many waiting passengers
         if hasattr(agent, 'waiting_passengers') and agent.waiting_passengers > 50:
-            portrayal["stroke_color"] = "#d35400"  # Orange border for crowded
+            portrayal["Color"] = "#ffd60a"  # Yellow when crowded
+            portrayal["stroke_color"] = "#ff9500"  # Orange border
             portrayal["stroke"] = 4
         
         return portrayal
     
-    # Empty cells - GRASS GREEN BACKGROUND (nature theme)
+    # Empty cells - Dark background to match the dark theme
     return {
         "Shape": "rect",
         "w": 1,
         "h": 1,
         "Filled": "true",
         "Layer": 0,
-        "Color": "#7cb342",  # Grass green background
+        "Color": "#1a1a2e",  # Dark blue-gray - matches dark theme
+        "stroke_color": "#2a2a3e",  # Subtle dark gray grid lines
+        "stroke": 1,
     }
 
 
@@ -530,11 +794,14 @@ def create_server(model_params=None):
         }
     
     # Create large, detailed grid visualization
-    grid = CanvasGrid(
+    grid = CustomCanvasGrid(
         agent_portrayal,
         50, 50,
         600, 600  # Larger canvas for better visibility
     )
+    
+    # Create style injector for global CSS (must be first!)
+    style_injector = StyleInjectorElement()
     
     # Create statistics and legend
     stats_element = NetworkStatsElement()
@@ -544,38 +811,38 @@ def create_server(model_params=None):
     # Enhanced charts with better styling
     train_chart = ChartModule(
         [
-            {"Label": "Active Trains", "Color": "#3498db"},
-            {"Label": "Delayed Trains", "Color": "#e74c3c"},
-            {"Label": "Total Arrivals", "Color": "#2ecc71"},
+            {"Label": "Active Trains", "Color": "#60a5fa"},
+            {"Label": "Delayed Trains", "Color": "#f87171"},
+            {"Label": "Total Arrivals", "Color": "#4ade80"},
         ],
         data_collector_name="datacollector"
     )
     
     delay_chart = ChartModule(
         [
-            {"Label": "Average Delay", "Color": "#e67e22"},
+            {"Label": "Average Delay", "Color": "#fb923c"},
         ],
         data_collector_name="datacollector"
     )
     
     energy_chart = ChartModule(
         [
-            {"Label": "Total Energy", "Color": "#f39c12"},
+            {"Label": "Total Energy", "Color": "#fbbf24"},
         ],
         data_collector_name="datacollector"
     )
     
     passenger_chart = ChartModule(
         [
-            {"Label": "Waiting Passengers", "Color": "#9b59b6"},
+            {"Label": "Waiting Passengers", "Color": "#c084fc"},
         ],
         data_collector_name="datacollector"
     )
     
-    # Create server with all elements
+    # Create server with all elements - style injector FIRST for CSS override
     server = ModularServer(
         RailwayNetworkModel,
-        [grid, stats_element, schedule_element, legend_element, train_chart, delay_chart, energy_chart, passenger_chart],
+        [style_injector, grid, stats_element, schedule_element, legend_element, train_chart, delay_chart, energy_chart, passenger_chart],
         "🚄 Smart Railway Network Simulation - Control Center",
         model_params
     )

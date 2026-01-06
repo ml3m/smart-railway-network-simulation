@@ -1,6 +1,35 @@
-mesa>=2.1.0
+# Smart Railway Network Simulation - Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core simulation framework
+mesa>=2.1.0,<3.0.0
+
+# Numerical and data processing
 numpy>=1.24.0
 pandas>=2.0.0
+
+# Visualization
 matplotlib>=3.7.0
+
+# Network/graph operations for pathfinding
 networkx>=3.0
 
+# Modern web-based visualization (optional, for Solara UI)
+solara>=1.25.0
+
+# Rich terminal output
+rich>=13.0.0
+
+# CLI enhancements
+click>=8.1.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Type checking (development)
+mypy>=1.0.0
+
+# Code formatting (development)
+black>=23.0.0
+isort>=5.12.0
